@@ -1,0 +1,89 @@
+version: 2
+
+models:
+
+  # 🟢 FACT TABLE
+  - name: fact_orders
+    description: "Fact table containing order-level data with total order value"
+
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order"
+        tests:
+          - not_null
+          - unique
+
+      - name: user_id
+        description: "Foreign key linking to users"
+
+      - name: created_at
+        description: "Timestamp when the order was created"
+
+      - name: total_order_value
+        description: "Total value of the order calculated from order items"
+
+
+  # 🔵 DIMENSION TABLE
+  - name: dim_users
+    description: "Dimension table containing user details"
+
+    columns:
+      - name: user_id
+        description: "Unique identifier for each user"
+        tests:
+          - not_null
+          - unique
+
+      - name: country
+        description: "User's country"
+
+
+  # 🟡 RFM BASE MODEL
+  - name: rfm_users
+    description: "Aggregated user-level metrics for RFM analysis"
+
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: recency
+        description: "Number of days since the user's last order"
+
+      - name: frequency
+        description: "Total number of orders made by the user"
+
+      - name: monetary_value
+        description: "Total amount spent by the user"
+
+
+  # 🟠 RFM SCORED MODEL
+  - name: rfm_scored
+    description: "RFM scores assigned to each user"
+
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+
+      - name: r_score
+        description: "Recency score (1 to 5, higher is better)"
+
+      - name: f_score
+        description: "Frequency score (1 to 5, higher is better)"
+
+      - name: m_score
+        description: "Monetary score (1 to 5, higher is better)"
+
+
+  # 🔴 FINAL SEGMENTATION MODEL
+  - name: rfm_segment
+    description: "Final customer segmentation based on RFM scores"
+
+    columns:
+      - name: user_id
+        description: "Unique user identifier"
+
+      - name: rfm_segment
+        description: "Customer segment label (VIP, Loyal, New, At Risk, Lost, Regular)"
