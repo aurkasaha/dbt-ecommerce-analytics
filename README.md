@@ -1,15 +1,22 @@
-Welcome to your new dbt project!
+# dbt E-Commerce Analytics Capstone
 
-### Using the starter project
+Analytics engineering project built with dbt Core + BigQuery
+using the thelook_ecommerce public dataset.
 
-Try running the following commands:
-- dbt run
-- dbt test
+## Architecture
+- Staging: raw source cleaning (orders, users, order_items)
+- Intermediate: joined and enriched models
+- Marts: dim_users, fact_orders, RFM segmentation
 
+## What's included
+- Layered dbt architecture (staging → intermediate → marts)
+- Incremental model design (fact_orders)
+- RFM customer segmentation (rfm_users → rfm_scored → rfm_segment)
+- dbt tests (not_null, unique, relationships)
+- Documentation with lineage graph
+- Custom macro
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+## Stack
+dbt Core | BigQuery | SQL<img 
+width="1298" height="592" alt="Screenshot 2026-04-11 013010" src="https://github.com/user-attachments/assets/77c9f643-ce88-4b96-b2c2-486596605b81" />
+
